@@ -22,7 +22,7 @@ ext {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.example.android.emojicompat"
         minSdkVersion 19
@@ -52,7 +52,8 @@ dependencies {
     compile "com.android.support:support-emoji:$supportLibVersion"
     compile "com.android.support:support-emoji-appcompat:$supportLibVersion"
     compile "com.android.support:support-emoji-bundled:$supportLibVersion"
-    compile project(":lib");
+//    compile project(":lib")
+    compile 'com.lsjwzh.fonts:DownloadableFontsProvider:1.0'
     // Test
     testCompile 'junit:junit:4.12'
 }

@@ -16,34 +16,53 @@
 
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath('com.android.tools.build:gradle:3.0.1') {
+            exclude module: 'proguard-gradle'
+        }
+
+        classpath('net.sf.proguard:proguard-gradle:5.3.3') {
+            force = true
+        }
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
     }
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 allprojects {
-    repositories {
-        jcenter()
-        maven {
-            url "https://maven.google.com"
+    gradle.taskGraph.whenReady {
+        tasks.each { task ->
+            if (task.name.equals('mockableAndroidJar')) {
+                task.enabled = false
+            }
         }
-//        google()
+    }
+    repositories {
+        maven {
+            url "https://dl.bintray.com/lsjwzh/maven"
+        }
+
+        maven {
+            url properties.getProperty("sdk.dir") + "/extras/android/m2repository"
+        }
+        mavenCentral()
+        jcenter()
+        google()
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-
-
-
-
 
 
 
