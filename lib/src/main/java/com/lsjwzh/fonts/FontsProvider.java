@@ -90,6 +90,7 @@ public class FontsProvider extends ContentProvider {
       } else if (downloadStatus == IFontsDownloader.DownloadStatus.DOWNLOADING) {
         resultCode = RESULT_CODE_FONT_UNAVAILABLE;
       } else {
+        resultCode = RESULT_CODE_FONT_UNAVAILABLE;
         sFontsDownloader.startDownload(fontKey);
       }
     }
